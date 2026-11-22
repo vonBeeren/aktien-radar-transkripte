@@ -257,6 +257,7 @@ def main() -> int:
     jetzt = datetime.now(timezone.utc)
     heute = jetzt.astimezone(BERLIN).date()
 
+    vorher = lade(BERICHT, {})
     bericht = {"lauf": jetzt.isoformat(timespec="seconds"), "kanaele": {}, "neu": [],
                "ok": 0, "ohne_transkript": 0, "fehler": 0, "blockiert": False, "meldungen": []}
 
@@ -335,6 +336,8 @@ def main() -> int:
             bericht["fehler"] += 1
             bericht["meldungen"].append(f"{v['id']}: {meldung}")
         log(f"  {v['datum']} @{v['kanal']} {v['id']}: {status} {meldung}")
+
+    bericht["blockiert_in_folge"] = (vorher.get("blockiert_in_folge", 0) + 1) if bericht["blockiert"] else 0
 
     # 3. Speichern
     geordnet = dict(sorted(index.items(), key=lambda kv: kv[1]["veroeffentlicht"], reverse=True))

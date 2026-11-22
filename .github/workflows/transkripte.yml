@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: transkripte
@@ -52,4 +53,18 @@ jobs:
           else
             git commit -m "Transkripte $(TZ=Europe/Berlin date +%F)"
             git push
+          fi
+
+      - name: Blockade prüfen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(python -c "import json;print(json.load(open('letzter_lauf.json')).get('blockiert_in_folge',0))")
+          if [ "$n" -ge 3 ]; then
+            echo "YouTube hat $n Läufe in Folge blockiert – täglicher Zeitplan wird abgeschaltet."
+            gh workflow disable transkripte.yml --repo "$GITHUB_REPOSITORY"
+          fi
+          if [ "$n" -gt 0 ]; then
+            echo "::error::Von YouTube blockiert ($n. Lauf in Folge)"
+            exit 1
           fi
