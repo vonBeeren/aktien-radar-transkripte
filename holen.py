@@ -183,7 +183,42 @@ class Blockiert(Exception):
     pass
 
 
+def ytdlp_transkript(video_id: str) -> tuple[str, dict | None, str]:
+    """Reserve-Weg über yt-dlp (json3-Untertitel)."""
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        out = subprocess.run(
+            ["yt-dlp", "--skip-download", "--write-subs", "--write-auto-subs",
+             "--sub-langs", "de,de-orig,de-DE,en", "--sub-format", "json3",
+             "-o", f"{tmp}/%(id)s.%(ext)s", f"https://www.youtube.com/watch?v={video_id}"],
+            capture_output=True, text=True, timeout=180,
+        )
+        dateien = sorted(Path(tmp).glob("*.json3"), key=lambda p: (".en." in p.name, p.name))
+        if not dateien:
+            fehler = (out.stderr.strip().splitlines() or [""])[-1][:200]
+            if "Sign in to confirm" in out.stderr or "bot" in out.stderr.lower() or "429" in out.stderr:
+                raise Blockiert(f"yt-dlp: {fehler}")
+            return "kein_transkript", None, f"yt-dlp: {fehler}"
+        d = json.loads(dateien[0].read_text(encoding="utf-8"))
+        sprache = dateien[0].suffixes[-2].lstrip(".")
+    segmente = []
+    for ev in d.get("events", []):
+        text = "".join(s.get("utf8", "") for s in ev.get("segs") or []).strip()
+        if text:
+            segmente.append({"start": round(ev.get("tStartMs", 0) / 1000, 2), "text": text})
+    return "ok", {"sprache": sprache, "automatisch": None, "verfuegbar": [], "segmente": segmente,
+                  "weg": "yt-dlp"}, ""
+
+
 def transkript(video_id: str) -> tuple[str, dict | None, str]:
+    try:
+        return api_transkript(video_id)
+    except Blockiert as e:
+        log(f"  {video_id}: API blockiert ({e}), versuche yt-dlp")
+        return ytdlp_transkript(video_id)
+
+
+def api_transkript(video_id: str) -> tuple[str, dict | None, str]:
     """-> (status, daten, meldung)"""
     from youtube_transcript_api import YouTubeTranscriptApi
 
