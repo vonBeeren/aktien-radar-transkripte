@@ -1,0 +1,55 @@
+{
+ "lauf": "2026-11-22T20:54:17+00:00",
+ "kanaele": {
+  "ErichsenGeld": {
+   "channel_id": "UCh2gY-BOw1DBxBoojRiqZjQ",
+   "weg": "rss",
+   "gefunden": 18,
+   "neu": 3
+  },
+  "BuyTheDipPodcast": {
+   "channel_id": "UCsyetPWPMh1rgUD7qMgQaeA",
+   "weg": "rss",
+   "gefunden": 18,
+   "neu": 2
+  },
+  "Hellinvestiert": {
+   "channel_id": "UC_C8nQYL3bvF-NF_Z9j7q8A",
+   "weg": "rss",
+   "gefunden": 15,
+   "neu": 3
+  },
+  "Aktienfinder": {
+   "channel_id": "UCIWWG1e4I5cbWSAqHR9TSdA",
+   "weg": "rss",
+   "gefunden": 15,
+   "neu": 2
+  },
+  "GelbesGeld": {
+   "channel_id": "UCBaWAYK0Q_LobpCLpEFM5Ug",
+   "weg": "rss",
+   "gefunden": 15,
+   "neu": 1
+  },
+  "mario.lochner": {
+   "channel_id": "UCWFnsgnkOAc0D7OweruB3hA",
+   "weg": "rss",
+   "gefunden": 30,
+   "neu": 2
+  },
+  "China2Invest": {
+   "channel_id": "UC4hPPEQ6_HeLvAQNt_hd38A",
+   "weg": "rss",
+   "gefunden": 15,
+   "neu": 2
+  }
+ },
+ "neu": [],
+ "ok": 0,
+ "ohne_transkript": 0,
+ "fehler": 0,
+ "blockiert": true,
+ "meldungen": [
+  "9bJLbnjsPqI: von YouTube blockiert (RequestBlocked)"
+ ]
+}
