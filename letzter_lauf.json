@@ -1,5 +1,5 @@
 {
- "lauf": "2026-11-22T20:55:21+00:00",
+ "lauf": "2026-11-23T15:06:11+00:00",
  "kanaele": {
   "ErichsenGeld": {
    "channel_id": "UCh2gY-BOw1DBxBoojRiqZjQ",
@@ -50,6 +50,7 @@
  "fehler": 0,
  "blockiert": true,
  "meldungen": [
-  "F-2FY0HtjYU: von YouTube blockiert (yt-dlp: ERROR: [youtube] F-2FY0HtjYU: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-d)"
- ]
+  "LzeW9cTgABs: von YouTube blockiert (yt-dlp: ERROR: [youtube] LzeW9cTgABs: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-d)"
+ ],
+ "blockiert_in_folge": 1
 }
