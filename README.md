@@ -1,11 +1,5 @@
-# Aktien-Radar: YouTube-Transkripte
+# Aktien-Radar: YouTube-Transkripte (eingestellt)
 
-GitHub Actions holt täglich (04:30 UTC, also 5:30/6:30 Uhr in Berlin) neue Videos der Kanäle in `kanaele.json` und speichert die Untertitel. Shorts sind nicht dabei.
+Versuch vom 22.–25.11.2026, YouTube-Transkripte per GitHub Actions zu holen. Gescheitert: YouTube blockiert die GitHub-Server (youtube-transcript-api: RequestBlocked, yt-dlp: „Sign in to confirm you're not a bot“).
 
-- `transkripte/<datum>_<kanal>_<videoid>.json`: id, kanal, quelle, titel, datum, veroeffentlicht, beschreibung, link, sprache, automatisch, segmente `[{start, text}]`
-- `index.json`: alle bekannten Videos mit `status` (`ok`, `kein_transkript`, `blockiert`, `fehler`, `offen`), `versuche` und `datei`
-- `letzter_lauf.json`: Bericht des letzten Laufs (u. a. `blockiert: true`, wenn YouTube die IP sperrt)
-
-Videos ohne Transkript werden bis zu 5 Tage lang erneut versucht, weil automatische Untertitel oft erst Stunden nach dem Upload erscheinen.
-
-Lauf von Hand: Actions → „Transkripte holen“ → Run workflow.
+Skript und Workflow wurden entfernt und sind im Git-Verlauf noch vorhanden (Commit 9ed98c8).
